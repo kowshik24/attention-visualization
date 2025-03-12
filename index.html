@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attention Visualization</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="doc-toggle">Documentation</div>
+    <div class="documentation-panel">
+        <h2>Detailed Documentation</h2>
+        <div class="doc-content">
+            <section>
+                <h3>Understanding Attention Mechanisms</h3>
+                <p>Attention mechanisms are a crucial component in modern NLP systems:</p>
+                <ul>
+                    <li>Self-Attention: How words relate to other words in the same sentence</li>
+                    <li>Cross-Attention: Relationships between different sentences</li>
+                    <li>Multi-Head Attention: Multiple attention patterns in parallel</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Attention Score Calculation</h3>
+                <pre><code>
+score = similarity(source_embedding, target_embedding)
+attention = softmax(score / √d)
+                </code></pre>
+            </section>
+            <!-- Add more documentation sections -->
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Attention Visualization Between Sentences</h1>
+        
+        <div class="input-section">
+            <h2>Input Text <span class="tooltip" data-tooltip="Enter multiple sentences separated by periods">ⓘ</span></h2>
+            <textarea id="inputText" placeholder="Enter multiple sentences here. Each sentence should end with a period, question mark, or exclamation point." rows="6">The cat sat on the mat. The dog played in the yard. Birds flew overhead. The children laughed and played games.</textarea>
+            <div class="controls">
+                <button id="processBtn" class="tooltip" data-tooltip="Click to analyze the text">Process Text</button>
+                <div class="settings">
+                    <label for="attentionType">Attention Type:</label>
+                    <select id="attentionType">
+                        <option value="cosine">Cosine Similarity</option>
+                        <option value="dotProduct">Dot Product</option>
+                        <option value="scaled">Scaled Dot Product</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <div class="results-section">
+            <h2>Attention Visualization</h2>
+            <div id="attentionMatrix" class="attention-matrix"></div>
+            
+            <div class="visualization-info">
+                <div class="legend">
+                    <div class="legend-title">Attention Strength</div>
+                    <div class="legend-scale">
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: rgb(255, 230, 230);"></div>
+                            <div class="legend-label">Low</div>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: rgb(255, 150, 150);"></div>
+                            <div class="legend-label">Medium</div>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: rgb(255, 50, 50);"></div>
+                            <div class="legend-label">High</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="insightsSection" class="insights">
+                    <h3>Attention Insights</h3>
+                    <div id="insights">Process text to see insights.</div>
+                </div>
+            </div>
+            
+            <div class="sentence-explorer">
+                <h3>Sentence Explorer</h3>
+                <div id="sentencesList" class="sentences-list">
+                    <p class="instruction">Click on a cell in the heatmap to see details.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="sentence-relationship">
+            <h3>Sentence Relationship View</h3>
+            <div id="relationshipView" class="relationship-view">
+                <div id="sourceText" class="relationship-text">Source sentence will appear here</div>
+                <div id="targetText" class="relationship-text">Target sentence will appear here</div>
+                <div id="attentionScore" class="attention-score">Attention score: N/A</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="explanation-section">
+        <h2>How This Works</h2>
+        <div class="explanation">
+            <h3>What is Attention?</h3>
+            <p>Attention is a mechanism that allows models to focus on different parts of the input when producing output. In the context of natural language processing, attention helps determine how much focus should be placed on specific words or sentences when processing text.</p>
+            
+            <h3>How This Visualization Works</h3>
+            <p>This tool splits your text into sentences and computes attention scores between each pair of sentences. The attention is calculated using vector representations of the sentences and the selected attention method.</p>
+            
+            <h3>Interpreting the Visualization</h3>
+            <ol>
+                <li>Each cell in the heatmap represents the attention score between a pair of sentences.</li>
+                <li>Darker red cells indicate higher attention (stronger relationship).</li>
+                <li>Click on any cell to see detailed information about the relationship between those sentences.</li>
+                <li>The insights section provides an automated analysis of the attention patterns.</li>
+            </ol>
+            
+            <h3>Available Attention Types</h3>
+            <ul>
+                <li><strong>Cosine Similarity:</strong> Measures the cosine of the angle between two sentence vectors (value from -1 to 1, normalized to 0-1).</li>
+                <li><strong>Dot Product:</strong> Calculates the product of corresponding elements of two sentence vectors.</li>
+                <li><strong>Scaled Dot Product:</strong> Dot product scaled by the square root of the vector dimension (similar to attention in transformer models).</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>Created by <span id="username">kowshik24</span> | <a href="https://github.com/kowshik24/attention-visualization" target="_blank">GitHub Repository</a></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
